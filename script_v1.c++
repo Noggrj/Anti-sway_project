@@ -278,7 +278,7 @@ ISR(PCINT2_vect) {
   byte changes = abNew ^ abOld; // Use XOR to flag changed bits
   char wayflag = 2 * abNew ^ abNew; // Use XOR to get state-bits
   byte test2;
-  for (byte i = 0; i < 1; ++i) {
+  for (byte i = 0; i < NENC; ++i) {
     // For PD2-7, low 2 bits aren't relevant.  Move the shifts to
     // end of for loop if low 2 bits carry encoder info.
     wayflag >>= 2;      // Discard low state-bits
