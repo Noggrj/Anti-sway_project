@@ -5,7 +5,7 @@ close all;
 Ts = 5e-3;
 
 % dados = dlmread('dados9',',',1,0);
-dados = dlmread('data_csv.csv',',',1,0);
+dados = dlmread('Leitura_Dados_encoder1_encoder2.txt',',',1,0);
 
 y = dados(:,2);
 u = dados(:,1);
@@ -56,7 +56,7 @@ legend('y(k)','yhat1(k)')
 
 Gdf1 = filt([0 theta1(1)],[1 theta1(2)])
 Gd1 = tf([0 theta1(1)],[1 theta1(2)],Ts)
-printAR(Gd1,0,'u','y')
+printARX(Gd1,0,'u','y')
 
 %% Modelando como um sistema de 2a ordem
 psi2 = [ui(2:Ni-1) ui(1:Ni-2) -yi(2:Ni-1) -yi(1:Ni-2)]; % Matriz dos regressores;
@@ -78,7 +78,7 @@ legend('y(k)','yhat2(k)')
 
 Gdf2 = filt([0 theta2(1) theta2(2)],[1 theta2(3) theta2(4)])
 Gd2 = tf([0 theta2(1) theta2(2)],[1 theta2(3) theta2(4)],Ts)
-printAR(Gd2,0,'u','y')
+printARX(Gd2,0,'u','y')
 
 
 
@@ -96,3 +96,4 @@ legend('y(k)','yhat1(k)','yhat2(k)')
 %% Resposta ao degrau:
 figure(5);
 step(Gd1,Gd2);
+sisotool(Gd1);
